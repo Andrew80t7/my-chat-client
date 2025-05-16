@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>STOMP /send Test</title>
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/dist/stomp.umd.min.js"></script>
+</head>
+<body>
+  <h3>Test STOMP /send</h3>
+  <pre id="log"></pre>
+  <script>
+    const log = txt => document.getElementById('log').innerText += txt + '\\n';
+
+    const socket = new SockJS('http://localhost:8080/ws');
+    const client = StompJs.Stomp.over(socket);
+    client.connect({}, f => {
+      log('🔵 Connected: ' + f);
+
+      client.subscribe('/topic/chat/4', msg => {
+        log('🔔 Received: ' + msg.body);
+      });
+
+      const dto = { senderId: 1, chatId: 4, text: 'Hello from HTML!' };
+      client.send('/app/send', {}, JSON.stringify(dto));
+      log('➡️ Sent: ' + JSON.stringify(dto));
+    }, e => log('❌ Error: ' + e));
+  </script>
+</body>
+</html>
