@@ -117,6 +117,7 @@ interface UserSummary { id: number; username: string; }
 const CreateChat: React.FC<{ token: string }> = ({ token }) => {
   const [users, setUsers] = useState<UserSummary[]>([]);
   const [sel, setSel] = useState<number[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>(''); // State for search query
   const nav = useNavigate();
 
   useEffect(() => {
@@ -142,11 +143,23 @@ const CreateChat: React.FC<{ token: string }> = ({ token }) => {
       .catch(console.error);
   };
 
+  // Filter users based on search query
+  const filteredUsers = users.filter(user =>
+    user.username.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="create-chat">
       <h2>Создать чат</h2>
+      <input
+        type="text"
+        placeholder="Поиск пользователей..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="search-bar"
+      />
       <ul>
-        {users.map(u => (
+        {filteredUsers.map(u => (
           <li key={u.id}>
             <label>
               <input
@@ -165,6 +178,7 @@ const CreateChat: React.FC<{ token: string }> = ({ token }) => {
     </div>
   );
 };
+
 
 // 4) ChatWindow
 interface Message { senderId: number; text: string; timestamp: string; }
