@@ -203,6 +203,7 @@ const ChatWindow: React.FC<{ token: string }> = ({ token }) => {
   }, [chatId, token, uid]);
 
   // WS
+  // Frontend logging
   useEffect(() => {
     if (!chatId) return;
     const socket = new SockJS('http://localhost:8080/ws');
@@ -211,7 +212,9 @@ const ChatWindow: React.FC<{ token: string }> = ({ token }) => {
       connectHeaders: { Authorization: `Bearer ${token}` },
       onConnect: () => {
         client.subscribe(`/topic/chat/${chatId}`, (msg: IMessage) => {
-          setMsgs(prev => [...prev, JSON.parse(msg.body)]);
+          const message = JSON.parse(msg.body);
+          console.log('Received message:', message); // Log the message
+          setMsgs(prev => [...prev, message]);
         });
       },
     });
@@ -219,6 +222,7 @@ const ChatWindow: React.FC<{ token: string }> = ({ token }) => {
     clientRef.current = client;
     return () => { client.deactivate(); };
   }, [chatId, token]);
+
 
   const send = () => {
     if (!input.trim() || !clientRef.current?.connected) return;

@@ -1,205 +1,133 @@
-/* src/App.css */
-
-/* Общие стили */
+/* App.css */
 body {
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #f5f5f5;
-}
-.app-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem;
+  background-color: #f4f4f9;
+  color: #333;
 }
 
-/* Навигация */
+.auth-container,
+.chat-list,
+.create-chat,
+.chat-window {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #444;
+  text-align: center;
+}
+
+.auth-form input,
+.search-bar,
+.chat-input input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #cccccc;
+}
+
+.error {
+  color: #ff0000;
+  text-align: center;
+}
+
+.chat-history {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.mine {
+  text-align: right;
+  color: #007bff;
+}
+
+.other {
+  text-align: left;
+  color: #28a745;
+}
+
+.time {
+  font-size: 0.8em;
+  color: #666;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #2196f3;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-}
-.navbar .nav-link {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 1rem;
-}
-.navbar button {
-  background: #f44336;
-  border: none;
-  color: #fff;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  cursor: pointer;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
 }
 
-/* Форма авторизации */
-.auth-container {
-  width: 360px;
-  margin: 5rem auto;
-  padding: 2rem;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-}
-.auth-container h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-.auth-form input {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.auth-btn {
-  width: 100%;
-  padding: 0.75rem;
-  background: #2196f3;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.auth-btn:hover {
-  background: #1976d2;
-}
-.toggle-mode {
-  display: block;
-  margin: 1rem auto 0;
-  background: none;
-  border: none;
-  color: #2196f3;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.error {
-  background: #ffebee;
-  color: #c62828;
-  padding: 0.5rem;
-  border: 1px solid #f44336;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-/* Список чатов */
-.chat-list {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-.chat-list h2 {
-  margin-top: 0;
-}
-.chat-list ul {
-  list-style: none;
-  padding: 0;
-}
-.chat-list li {
-  margin: 0.5rem 0;
-}
-.chat-list a {
-  color: #2196f3;
+.navbar a {
+  color: white;
   text-decoration: none;
 }
-.chat-list .create-link {
-  display: inline-block;
-  margin-top: 1rem;
-  color: #2196f3;
-}
 
-/* Форма создания чата */
-.create-chat {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-.create-chat h2 {
-  margin-top: 0;
-}
-.create-chat ul {
-  list-style: none;
-  padding: 0;
-  max-height: 200px;
-  overflow-y: auto;
-}
-.create-chat li {
-  margin: 0.5rem 0;
-}
-.create-chat button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background: #2196f3;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.create-chat button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
-/* Окно чата */
-.chat-window {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-.chat-window h2 {
-  margin-top: 0;
-}
-.chat-history {
-  max-height: 400px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  background: #fafafa;
-}
-.chat-history .mine {
-  text-align: right;
-  margin: 0.5rem 0;
-}
-.chat-history .other {
-  text-align: left;
-  margin: 0.5rem 0;
-}
-.chat-history .time {
+.create-link {
   display: block;
-  font-size: 0.75rem;
-  color: #666;
+  text-align: center;
+  margin-top: 20px;
+  color: #007bff;
+  text-decoration: none;
 }
-.chat-input {
-  display: flex;
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }
-.chat-input input {
-  flex: 1;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px 0 0 4px;
+
+li {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
 }
-.chat-input button {
-  padding: 0.5rem 1rem;
-  background: #2196f3;
-  color: #fff;
-  border: none;
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
+
+li:last-child {
+  border-bottom: none;
 }
-.chat-input button:hover {
-  background: #1976d2;
+
+/* Add this to your App.css */
+.chat-history div {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
